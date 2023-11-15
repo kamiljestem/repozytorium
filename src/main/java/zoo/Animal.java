@@ -1,5 +1,7 @@
 package zoo;
 
+import java.util.List;
+
 public class Animal {
     String specie;
     char gender;
@@ -14,6 +16,8 @@ public class Animal {
 
     long caloriesCounter = 0L;
 
+    int speed = 0;
+
     public Animal(String specie) {
         this.specie = specie;
     }
@@ -23,6 +27,17 @@ public class Animal {
     }
 
     // alt + inster -> dodaje konctruktor
+
+    public void setSpeed(int speed) {this.speed = speed;}
+
+    public void move(int distance) {
+        if (speed == 0) {
+            System.out.println("Leze i nigdzie sie nie ruszam");
+        } else {
+            double timeToReach = (double) distance / speed;
+            System.out.println("Poruszam sie z predkoscia: [" + speed +"m/s. Za: [" + timeToReach + "] dotre do celu.");
+        }
+    }
 
     public void feed(String food) {
         System.out.println(food);
@@ -51,5 +66,19 @@ public class Animal {
             caloriesCounter += food.calories;
             System.out.println("Dziś zjadłem " + caloriesCounter + " kalorii.");
         }
+    }
+
+    public void feed(List<Food> foods) {
+        for (Food f : foods) {
+            if (isPoison(f)) {
+                System.out.println("Fuj, sam to zjedz!");
+            } else {
+                feed(f);
+            }
+        }
+    }
+
+    private static boolean isPoison(Food food) {
+        return food.foodType.equals("trutka");
     }
 }

@@ -5,17 +5,27 @@ import java.util.List;
 
 public class Owner {
     public static void main(String[] args) {
-        Animal dog = new Animal("dog");
 
-        dog.speak();
-//        dog.feed("jedzenie");
-//        dog.feed("jedzenie", 2);
+        Animal dog = new Animal("dog");
+        feedAnimal(dog);
+
+        dog.move(10);
+        dog.setSpeed(5);
+        dog.move(1000);
+
+        Animal polly = new Bird("papuga");
+        polly.setSpeed(100);
+        polly.move(1000);
+
+    }
+
+    private static void feedAnimal(Animal animal) {
+        animal.speak();
 
         Food paroowa = new Food("parówka", 50000);
         Food trutka = new Food("trutka", 50000);
         Food marchewa = new Food("marchewka", 10000);
         Food smaczek = new Food("smaczek", 5000);
-
 
         List<Food> jedzonko = new ArrayList<>();
 
@@ -24,13 +34,12 @@ public class Owner {
         jedzonko.add(marchewa);
         jedzonko.add(smaczek);
 
-        for (Food food : jedzonko) {
-            if (food.foodType.equals("trutka")) {
-                System.out.println("sam se to zjedz!");
-            } else {
-                dog.feed(food);
-            }
-        }
+        // streamy  ->                     lambdy
+//        jedzonko.stream().forEach(s -> dog.feed(s));
 
+        animal.feed(jedzonko);
     }
+
+
+
 }
